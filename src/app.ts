@@ -54,42 +54,42 @@ const startServer = async (): Promise<void> => {
     console.log(`Listening on port http://localhost:${PORT}/`);
   });
 
-  try {
-    const data = {
-      phoneNumber: '2123456789',
-      phoneCode: '+91',
-    };
-    await User.create(data);
-    console.log("User created successfully");
-  } catch (error) {
-    console.error("Error creating user:", error);
-  }
+  // try {
+  //   const data = {
+  //     phoneNumber: '2123456789',
+  //     phoneCode: '+91',
+  //   };
+  //   await User.create(data);
+  //   console.log("User created successfully");
+  // } catch (error) {
+  //   console.error("Error creating user:", error);
+  // }
 
-  let userScan;
+  // let userScan;
+
+  // try {
+  //   userScan = await User.scan().exec();
+  //   console.log(userScan);
+  // } catch (error) {
+  //   console.error("Error scanning users:", error);
+  // }
+
+  // try {
+  //   const data = {
+  //     name: 'Mayank',
+  //     email: 'mayank@gmail.com',
+  //     userId: 'f7d59b2f-95a5-45c8-bf4c-4e76b638584f'
+  //   };
+  //   await Account.create(data);
+  //   console.log("Account created successfully");
+  // } catch (error) {
+  //   console.error("Error creating user:", error);
+  // }
 
   try {
-    userScan = await User.scan().exec();
-    console.log(userScan);
-  } catch (error) {
-    console.error("Error scanning users:", error);
-  }
-
-  try {
-    const data = {
-      name: 'Mayank',
-      email: 'mayank@gmail.com',
-      userId: userScan?.[0].id
-    };
-    await Account.create(data);
-    console.log("Account created successfully");
-  } catch (error) {
-    console.error("Error creating user:", error);
-  }
-
-  try {
-    let account = await Account.scan().exec();
-    let populateAccount = await account.populate();
-    console.log(populateAccount);
+    let account = await (await Account.scan('id').contains('7eba1d4e-181f-4d50-aebb-a8ed4ed6e050').exec()).populate();
+    // let account = await (await Account.scan().exec()).populate();
+    console.log(account);
   } catch (error) {
     console.error("Error scanning users:", error);
   }
