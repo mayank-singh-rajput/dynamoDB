@@ -90,6 +90,7 @@ const startServer = async (): Promise<void> => {
     let account = await (await Account.scan('id').contains('7eba1d4e-181f-4d50-aebb-a8ed4ed6e050').exec()).populate();
     // let account = await (await Account.scan().exec()).populate();
     console.log(account);
+    console.log(account[0]?.userId?.phoneNumber)
   } catch (error) {
     console.error("Error scanning users:", error);
   }
